@@ -55,7 +55,10 @@ ON p2.pnro = pp.pnro
 WHERE p.numero = 102;
 --8) Construir una lista de todas las localidades en las cuales esté situado por lo menos
 --un proveedor o un producto.
-
+SELECT LOCALIDAD FROM PROVEEDORES
+UNION
+SELECT LOCALIDAD FROM PRODUCTOS
+ORDER BY LOCALIDAD;
 
 --9) Cambiar a “Chico” el tamaño de todos los productos medianos.
 UPDATE productos p SET "tamaÑo" = 'Chico'
