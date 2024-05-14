@@ -66,3 +66,32 @@ INSERT INTO "PROV-PROD" (NUMERO, PNRO, CANTIDAD) VALUES
 (2, 4, 300);
 INSERT INTO "PROV-PROD" (NUMERO, PNRO, CANTIDAD) VALUES (7, 6, 60);
 INSERT INTO "PROV-PROD" (NUMERO, PNRO, CANTIDAD) VALUES (8, 3, 287);
+
+
+CREATE TABLE IF NOT EXISTS Empleados (
+    cod_emp INT,
+    nombre VARCHAR(255),
+    apellido VARCHAR(255),
+    tipo_doc VARCHAR(255),
+    num_doc VARCHAR(255),
+    categoria VARCHAR(255),
+    cod_ofic INT
+);
+CREATE TABLE IF NOT EXISTS Oficinas (
+    cod_ofic INT PRIMARY KEY,
+    descripcion VARCHAR(255)
+);
+ALTER TABLE IF EXISTS Empleados
+ADD CONSTRAINT pk_empleados PRIMARY KEY (cod_emp);
+ALTER TABLE IF EXISTS Empleados
+ADD CONSTRAINT pk_empleados  CHECK (cod_emp BETWEEN (0,100));
+
+ALTER TABLE IF EXISTS Empleados
+ADD CONSTRAINT unique_tipo_doc_num_doc UNIQUE (tipo_doc, num_doc);
+
+ALTER TABLE IF EXISTS Empleados
+ADD CONSTRAINT check_categoria CHECK (categoria IN ('Senior', 'Semi Senior', 'Junior'));
+
+ALTER TABLE IF EXISTS Empleados
+ADD CONSTRAINT fk_empleados_cod_ofic FOREIGN KEY (cod_ofic) REFERENCES Oficinas(cod_ofic);
+
